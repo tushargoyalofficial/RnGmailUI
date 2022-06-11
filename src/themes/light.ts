@@ -60,4 +60,5 @@ const theme = createTheme({
   },
 });
 
+export default theme;
 export type Theme = typeof theme;
