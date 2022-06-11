@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavigatorScreenParams } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {NavigatorScreenParams} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import MainScreen from '@/screens/Main';
 import Sidebar from '@/components/Sidebar';
 

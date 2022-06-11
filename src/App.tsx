@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Navigations from '@/navs';
+import Navigations from '@/Navs';
 
 const App: FC = () => {
   return (
