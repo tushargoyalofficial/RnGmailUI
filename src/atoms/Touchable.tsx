@@ -9,12 +9,12 @@ import {
   OpacityProps,
   backgroundColorShorthand,
   backgroundColor,
+  border,
   opacity,
   ResponsiveValue,
   useRestyle,
   useResponsiveProp,
   useTheme,
-  border,
 } from '@shopify/restyle';
 import { Theme } from '@/themes';
 
