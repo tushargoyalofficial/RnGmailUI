@@ -1,16 +1,27 @@
 import React, { FC, memo, useCallback } from 'react';
-import { FlatList, FlatListProps } from 'react-native';
+import {
+  FlatListProps,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
+import Animated, { AnimateProps } from 'react-native-reanimated';
 import { createBox } from '@shopify/restyle';
 import { Theme } from '@/themes';
 import { Note } from '@/models';
 import NoteListItem from './NoteListItem';
 import NOTES from '@/fixtures/notes';
+import { Box } from '@/atoms';
 
-const StyledFlatList = createBox<Theme, FlatListProps<Note>>(FlatList);
+const StyledFlatList = createBox<Theme, AnimateProps<FlatListProps<Note>>>(
+  Animated.FlatList,
+);
 
-interface IProps { }
+interface IProps {
+  contentInsetTop: number;
+  onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+}
 
-const NoteList: FC<IProps> = () => {
+const NoteList: FC<IProps> = ({ onScroll, contentInsetTop }) => {
   const renderItem = useCallback(({ item }) => {
     return <NoteListItem {...item} />;
   }, []);
@@ -22,6 +33,9 @@ const NoteList: FC<IProps> = () => {
       renderItem={renderItem}
       keyExtractor={item => item.id}
       width="100%"
+      onScroll={onScroll}
+      scrollEventThrottle={16}
+      ListHeaderComponent={<Box width="100%" height={contentInsetTop} />}
     />
   );
 };
