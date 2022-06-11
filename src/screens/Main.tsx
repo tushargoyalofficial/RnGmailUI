@@ -1,11 +1,12 @@
 import React, { FC, memo } from 'react';
-import { Box, Text } from '@/atoms';
+import { Container } from '@/atoms';
+import NoteList from '@/components/NoteList';
 
 const MainScreen: FC = () => {
   return (
-    <Box flex={1} justifyContent="center" alignItems="center">
-      <Text>Main Screen!</Text>
-    </Box>
+    <Container justifyContent="center" alignItems="center">
+      <NoteList />
+    </Container>
   );
 };
 
