@@ -37,6 +37,7 @@
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "jest": "^26.6.3",
+    "lorem-ipsum": "^2.0.8",
     "metro-react-native-babel-preset": "^0.67.0",
     "prettier": "^2.6.2",
     "react-native-svg-transformer": "^1.0.0",
