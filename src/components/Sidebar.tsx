@@ -1,21 +1,18 @@
 import React, { FC, memo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { Box, Text } from '@/atoms';
 
 const Sidebar: FC<DrawerContentComponentProps> = () => {
   return (
-    <View style={styles.container}>
-      <Text>Sidebar tsx file!</Text>
-    </View>
+    <Box flex={1} bg="$sidebarBackground">
+      <SafeAreaView>
+        <Text variant="sidebar" m="lg">
+          Home
+        </Text>
+      </SafeAreaView>
+    </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default memo(Sidebar);
