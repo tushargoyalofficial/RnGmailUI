@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react';
+import React, { FC, memo, useCallback, useRef } from 'react';
 import { Box, Container, Text, TouchableOpacity } from '@/atoms';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -9,6 +9,7 @@ import useStickyHeader from '@/hooks/use-sticky-header';
 import NoteList from '@/components/NoteList';
 import HeaderBar from '@/components/HeaderBar';
 import FeatherIcon from '@/components/Icon';
+import MoveNoteSheet from '@/components/MoveNoteSheet';
 
 type IProps = CompositeScreenProps<
   DrawerScreenProps<HomeDrawerParamList, 'Main'>,
@@ -16,6 +17,7 @@ type IProps = CompositeScreenProps<
 >;
 
 const MainScreen: FC<IProps> = ({ navigation }) => {
+  const refMoveNoteSheet = useRef<MoveNoteSheet>(null);
   const { handleNoteListLayout, handleScroll, headerBarStyle, headerBarHeight } =
     useStickyHeader();
 
@@ -23,9 +25,28 @@ const MainScreen: FC<IProps> = ({ navigation }) => {
     navigation.toggleDrawer();
   }, []);
 
+  const handleNoteListItemPress = useCallback((_noteId: string) => {
+    //TODO: Later
+  }, []);
+
+  const handleNoteListItemSwipeLeft = useCallback(
+    (_noteId: string, _conceal: () => void) => {
+      const { current: menu } = refMoveNoteSheet;
+      if (menu) {
+        menu.show();
+      }
+    },
+    [],
+  );
+
   return (
     <Container justifyContent="center" alignItems="center">
-      <NoteList contentInsetTop={headerBarHeight} onScroll={handleScroll} />
+      <NoteList
+        contentInsetTop={headerBarHeight}
+        onScroll={handleScroll}
+        onItemPress={handleNoteListItemPress}
+        onItemSwipeLeft={handleNoteListItemSwipeLeft}
+      />
       <HeaderBar style={headerBarStyle} onLayout={handleNoteListLayout}>
         <TouchableOpacity
           m="xs"
@@ -41,6 +62,7 @@ const MainScreen: FC<IProps> = ({ navigation }) => {
           <FeatherIcon name="more-vertical" size={22} />
         </TouchableOpacity>
       </HeaderBar>
+      <MoveNoteSheet ref={refMoveNoteSheet} />
     </Container>
   );
 };
