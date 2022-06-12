@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react';
-import { LayoutChangeEvent } from 'react-native';
+import { LayoutChangeEvent, NativeScrollEvent } from 'react-native';
 import {
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -24,6 +25,15 @@ const useStickyHeader = () => {
     setHeaderBarHeight(event.nativeEvent.layout.height);
   }, []);
 
+  const handleEndDrag = (event: NativeScrollEvent) => {
+    'worklet';
+    if (progressY.value > 0.5 || event.contentOffset.y < headerBarHeight) {
+      translationY.value = withTiming(maxY);
+    } else {
+      translationY.value = withTiming(minY);
+    }
+  };
+
   const handleScroll = useAnimatedScrollHandler(
     {
       onBeginDrag: event => {
@@ -42,6 +52,8 @@ const useStickyHeader = () => {
         anchorY.value = offsetY;
         progressY.value = interpolate(translationY.value, [minY, maxY], [0, 1]);
       },
+      onEndDrag: handleEndDrag,
+      onMomentumEnd: handleEndDrag,
     },
     [minY, maxY, headerBarHeight],
   );
