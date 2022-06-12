@@ -3,6 +3,7 @@ import { createTheme } from '@shopify/restyle';
 
 // Palette
 const p = {
+  white: 'white',
   black: 'black',
   red: 'red',
   blue: 'blue',
@@ -33,6 +34,7 @@ const theme = createTheme({
     tabled: 760,
   },
   colors: {
+    white: p.white,
     black: p.black,
     red: p.red,
     blue: p.blue,

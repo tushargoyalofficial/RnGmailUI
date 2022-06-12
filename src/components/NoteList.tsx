@@ -19,12 +19,28 @@ const StyledFlatList = createBox<Theme, AnimateProps<FlatListProps<Note>>>(
 interface IProps {
   contentInsetTop: number;
   onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onItemPress: (noteId: string) => void;
+  onItemSwipeLeft: (noteId: string, cancel: () => void) => void;
 }
 
-const NoteList: FC<IProps> = ({ onScroll, contentInsetTop }) => {
-  const renderItem = useCallback(({ item }) => {
-    return <NoteListItem {...item} />;
-  }, []);
+const NoteList: FC<IProps> = ({
+  onScroll,
+  contentInsetTop,
+  onItemPress,
+  onItemSwipeLeft,
+}) => {
+  const renderItem = useCallback(
+    ({ item }) => {
+      return (
+        <NoteListItem
+          {...item}
+          onPress={onItemPress}
+          onSwipeLeft={onItemSwipeLeft}
+        />
+      );
+    },
+    [onItemPress, onItemSwipeLeft],
+  );
 
   return (
     <StyledFlatList
