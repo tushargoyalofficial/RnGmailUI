@@ -1,9 +1,9 @@
-import React, { FC, memo, useCallback, useRef, useState } from 'react';
-import { Box, Container, Text, TouchableOpacity } from '@/atoms';
-import { CompositeScreenProps } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DrawerScreenProps } from '@react-navigation/drawer';
-import { HomeDrawerParamList, RootStackParamsList } from '@/Navs';
+import React, {FC, memo, useCallback, useRef, useState} from 'react';
+import {Box, Container, Text, TouchableOpacity} from '@/atoms';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DrawerScreenProps} from '@react-navigation/drawer';
+import {HomeDrawerParamList, RootStackParamsList} from '@/Navs';
 import useStickyHeader from '@/hooks/use-sticky-header';
 
 import NoteList from '@/components/NoteList';
@@ -16,9 +16,9 @@ type IProps = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamsList>
 >;
 
-const MainScreen: FC<IProps> = ({ navigation }) => {
+const MainScreen: FC<IProps> = ({navigation}) => {
   const refMoveNoteSheet = useRef<MoveNoteSheet>(null);
-  const { handleNoteListLayout, handleScroll, headerBarStyle, headerBarHeight } =
+  const {handleNoteListLayout, handleScroll, headerBarStyle, headerBarHeight} =
     useStickyHeader();
 
   const [concealNoteListItem, setConcealNoteListItem] = useState<
@@ -29,13 +29,13 @@ const MainScreen: FC<IProps> = ({ navigation }) => {
     navigation.toggleDrawer();
   }, []);
 
-  const handleNoteListItemPress = useCallback((_noteId: string) => {
-    //TODO: Later
+  const handleNoteListItemPress = useCallback((noteId: string) => {
+    navigation.navigate('Detail', {noteId});
   }, []);
 
   const handleNoteListItemSwipeLeft = useCallback(
     (_noteId: string, conceal: () => void) => {
-      const { current: menu } = refMoveNoteSheet;
+      const {current: menu} = refMoveNoteSheet;
       if (menu) {
         menu.show();
         setConcealNoteListItem(() => conceal);

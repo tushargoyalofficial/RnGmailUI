@@ -1,7 +1,14 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
-import RNBottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import { Box, Text } from '@/atoms';
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
+import RNBottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import {Box, Text} from '@/atoms';
 import BottomSheet from './BottomSheet';
+import BookList from './BookList';
 
 interface IProps {
   onClose?: () => void;
@@ -12,18 +19,25 @@ interface IMoveNoteSheetHandle {
 }
 
 const MoveNoteSheet = forwardRef<IMoveNoteSheetHandle, IProps>(
-  ({ onClose }, ref) => {
+  ({onClose}, ref) => {
     const refBottomSheet = useRef<RNBottomSheet>(null);
     const snapPoints = useMemo(() => ['60%', '90%'], []);
 
     useImperativeHandle(ref, () => ({
       show: () => {
-        const { current: bottomSheet } = refBottomSheet;
+        const {current: bottomSheet} = refBottomSheet;
         if (bottomSheet) {
           bottomSheet.snapToIndex(0);
         }
       },
     }));
+
+    const handlePressItem = useCallback((_bookId: string) => {
+      const {current: bottomSheet} = refBottomSheet;
+      if (bottomSheet) {
+        bottomSheet.close();
+      }
+    }, []);
 
     return (
       <BottomSheet
@@ -41,9 +55,15 @@ const MoveNoteSheet = forwardRef<IMoveNoteSheetHandle, IProps>(
         bottomInset={46}
         enablePanDownToClose
         onClose={onClose}>
-        <Box justifyContent="center" alignItems="center">
-          <Text fontWeight="bold">Move Note Sheet Component</Text>
-        </Box>
+        <BookList
+          color="$foreground"
+          headerComponent={() => (
+            <Box justifyContent="center" alignItems="center">
+              <Text fontWeight="bold">Move Note Sheet Component</Text>
+            </Box>
+          )}
+          onPressItem={handlePressItem}
+        />
       </BottomSheet>
     );
   },
