@@ -1,7 +1,9 @@
 import light, {Theme} from './light';
-import dark from './dark'
+import dark from './dark';
+import nord from './nord';
+import solarized from './solarized-dark';
 
-export type IThemeNames = 'light' | 'dark';
+export type IThemeNames = 'light' | 'dark' | 'nord' | 'solarized';
 export interface IThemeMeta {
   id: IThemeNames;
   name: string;
@@ -18,6 +20,16 @@ export const themes: readonly IThemeMeta[] = [
     id: 'dark',
     name: 'Default Dark',
     theme: dark,
+  },
+  {
+    id: 'nord',
+    name: 'Nord Theme',
+    theme: nord,
+  },
+  {
+    id: 'solarized',
+    name: 'Solarized Dark',
+    theme: solarized,
   },
 ];
 
