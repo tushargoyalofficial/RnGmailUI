@@ -1,5 +1,4 @@
-import {Theme} from '@react-navigation/native';
-import {IThemeNames, themes} from '@/themes';
+import {Theme, IThemeNames, themes} from '@/themes';
 import {atom} from 'jotai';
 
 const activeThemeId = atom<IThemeNames>('dark');
