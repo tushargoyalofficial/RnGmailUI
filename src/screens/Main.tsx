@@ -10,6 +10,7 @@ import NoteList from '@/components/NoteList';
 import HeaderBar from '@/components/HeaderBar';
 import FeatherIcon from '@/components/Icon';
 import MoveNoteSheet from '@/components/MoveNoteSheet';
+import ThemePicker from '@/components/ThemePicker';
 
 type IProps = CompositeScreenProps<
   DrawerScreenProps<HomeDrawerParamList, 'Main'>,
@@ -17,7 +18,9 @@ type IProps = CompositeScreenProps<
 >;
 
 const MainScreen: FC<IProps> = ({navigation}) => {
+  const refThemePicker = useRef<ThemePicker>(null);
   const refMoveNoteSheet = useRef<MoveNoteSheet>(null);
+
   const {handleNoteListLayout, handleScroll, headerBarStyle, headerBarHeight} =
     useStickyHeader();
 
@@ -27,6 +30,13 @@ const MainScreen: FC<IProps> = ({navigation}) => {
 
   const handleSidebarToggle = useCallback(() => {
     navigation.toggleDrawer();
+  }, []);
+
+  const handleMenuToggle = useCallback(() => {
+    const {current: menu} = refThemePicker;
+    if (menu) {
+      menu.show();
+    }
   }, []);
 
   const handleNoteListItemPress = useCallback((noteId: string) => {
@@ -68,7 +78,11 @@ const MainScreen: FC<IProps> = ({navigation}) => {
         <Box flex={1} alignItems="center">
           <Text fontWeight="bold">All Notes</Text>
         </Box>
-        <TouchableOpacity m="xs" p="xs" rippleBorderLess>
+        <TouchableOpacity
+          m="xs"
+          p="xs"
+          rippleBorderLess
+          onPress={handleMenuToggle}>
           <FeatherIcon name="more-vertical" size={22} />
         </TouchableOpacity>
       </HeaderBar>
@@ -76,6 +90,7 @@ const MainScreen: FC<IProps> = ({navigation}) => {
         ref={refMoveNoteSheet}
         onClose={handleMoveNoteSheetClose}
       />
+      <ThemePicker ref={refThemePicker} />
     </Container>
   );
 };
