@@ -50,7 +50,11 @@ const Navigations = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="Detail" component={DetailsScreen} options={{}} />
+      <Stack.Screen
+        name="Detail"
+        component={DetailsScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
