@@ -1,16 +1,16 @@
-import React, { FC, memo, useCallback } from 'react';
+import React, {FC, memo, useCallback} from 'react';
 import {
   FlatListProps,
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-import Animated, { AnimateProps } from 'react-native-reanimated';
-import { createBox } from '@shopify/restyle';
-import { Theme } from '@/themes';
-import { Note } from '@/models';
+import Animated, {AnimateProps} from 'react-native-reanimated';
+import {createBox} from '@shopify/restyle';
+import {Theme} from '@/themes';
+import {Note} from '@/models';
 import NoteListItem from './NoteListItem';
 import NOTES from '@/fixtures/notes';
-import { Box } from '@/atoms';
+import {Box} from '@/atoms';
 
 const StyledFlatList = createBox<Theme, AnimateProps<FlatListProps<Note>>>(
   Animated.FlatList,
@@ -30,7 +30,7 @@ const NoteList: FC<IProps> = ({
   onItemSwipeLeft,
 }) => {
   const renderItem = useCallback(
-    ({ item }) => {
+    ({item}) => {
       return (
         <NoteListItem
           {...item}

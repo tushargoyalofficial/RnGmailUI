@@ -7,18 +7,18 @@ import MainScreen from '@/screens/Main';
 import DetailsScreen from '@/screens/Details';
 
 export type HomeDrawerParamList = {
-  Main: {};
-};
+  Main: {}
+}
 
 export type RootStackParamsList = {
-  Home: NavigatorScreenParams<HomeDrawerParamList>;
+  Home: NavigatorScreenParams<HomeDrawerParamList>
   Detail: {
-    noteId: string;
-  };
-};
+    noteId: string
+  }
+}
 
-const Stack = createNativeStackNavigator<RootStackParamsList>();
-const Drawer = createDrawerNavigator<HomeDrawerParamList>();
+const Stack = createNativeStackNavigator<RootStackParamsList>()
+const Drawer = createDrawerNavigator<HomeDrawerParamList>()
 
 const Home = () => {
   return (
@@ -26,19 +26,20 @@ const Home = () => {
       initialRouteName="Main"
       screenOptions={{
         drawerType: 'back',
-        swipeEdgeWidth: 200,
+        swipeEdgeWidth: 200
       }}
-      drawerContent={props => <Sidebar {...props} />}>
+      drawerContent={props => <Sidebar {...props} />}
+    >
       <Drawer.Screen
         name="Main"
         component={MainScreen}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
     </Drawer.Navigator>
-  );
-};
+  )
+}
 
 const Navigations = () => {
   return (
@@ -47,7 +48,7 @@ const Navigations = () => {
         name="Home"
         component={Home}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
@@ -56,7 +57,7 @@ const Navigations = () => {
         options={{headerShown: false}}
       />
     </Stack.Navigator>
-  );
-};
+  )
+}
 
-export default Navigations;
+export default Navigations

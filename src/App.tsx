@@ -16,7 +16,7 @@ const App: FC = () => {
         <Navigations />
       </ThemeProvider>
     </NavigationContainer>
-  );
-};
+  )
+}
 
-export default memo(App);
+export default memo(App)

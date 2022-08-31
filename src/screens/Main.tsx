@@ -15,7 +15,7 @@ import ThemePicker from '@/components/ThemePicker';
 type IProps = CompositeScreenProps<
   DrawerScreenProps<HomeDrawerParamList, 'Main'>,
   NativeStackScreenProps<RootStackParamsList>
->;
+>
 
 const MainScreen: FC<IProps> = ({navigation}) => {
   const refThemePicker = useRef<ThemePicker>(null);
@@ -26,11 +26,11 @@ const MainScreen: FC<IProps> = ({navigation}) => {
 
   const [concealNoteListItem, setConcealNoteListItem] = useState<
     (() => void) | null
-  >(null);
+  >(null)
 
   const handleSidebarToggle = useCallback(() => {
-    navigation.toggleDrawer();
-  }, []);
+    navigation.toggleDrawer()
+  }, [])
 
   const handleMenuToggle = useCallback(() => {
     const {current: menu} = refThemePicker;
@@ -47,17 +47,17 @@ const MainScreen: FC<IProps> = ({navigation}) => {
     (_noteId: string, conceal: () => void) => {
       const {current: menu} = refMoveNoteSheet;
       if (menu) {
-        menu.show();
-        setConcealNoteListItem(() => conceal);
+        menu.show()
+        setConcealNoteListItem(() => conceal)
       }
     },
-    [],
-  );
+    []
+  )
 
   const handleMoveNoteSheetClose = useCallback(() => {
-    concealNoteListItem && concealNoteListItem();
-    setConcealNoteListItem(null);
-  }, [concealNoteListItem]);
+    concealNoteListItem && concealNoteListItem()
+    setConcealNoteListItem(null)
+  }, [concealNoteListItem])
 
   return (
     <Container justifyContent="center" alignItems="center">
@@ -72,7 +72,8 @@ const MainScreen: FC<IProps> = ({navigation}) => {
           m="xs"
           p="xs"
           rippleBorderLess
-          onPress={handleSidebarToggle}>
+          onPress={handleSidebarToggle}
+        >
           <FeatherIcon name="menu" size={22} />
         </TouchableOpacity>
         <Box flex={1} alignItems="center">
@@ -92,7 +93,7 @@ const MainScreen: FC<IProps> = ({navigation}) => {
       />
       <ThemePicker ref={refThemePicker} />
     </Container>
-  );
-};
+  )
+}
 
-export default memo(MainScreen);
+export default memo(MainScreen)
