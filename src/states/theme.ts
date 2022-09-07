@@ -1,16 +1,16 @@
-import {Theme, IThemeNames, themes} from '@/themes';
-import {atom} from 'jotai';
+import { Theme, IThemeNames, themes } from '@/themes'
+import { atom } from 'jotai'
 
-const activeThemeId = atom<IThemeNames>('dark');
+const activeThemeId = atom<IThemeNames>('dark')
 
 export const activeThemeAtom = atom<Theme>(get => {
-  const themeId = get(activeThemeId);
-  const themeIndex = themes.findIndex(t => t.id === themeId);
+  const themeId = get(activeThemeId)
+  const themeIndex = themes.findIndex(t => t.id === themeId)
   if (themeIndex >= 0) {
-    return themes[themeIndex].theme;
+    return themes[themeIndex].theme
   } else {
-    return themes[0].theme;
+    return themes[0].theme
   }
-});
+})
 
-export default activeThemeId;
+export default activeThemeId

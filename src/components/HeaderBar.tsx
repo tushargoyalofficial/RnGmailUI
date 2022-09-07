@@ -1,11 +1,11 @@
-import React, { FC, memo } from 'react';
-import AnimatedBox, { AnimatedBoxProps } from '@/atoms/animated-box';
-import { Bar } from '@/atoms';
-import { Dimensions } from 'react-native';
+import React, { FC, memo } from 'react'
+import AnimatedBox, { AnimatedBoxProps } from '@/atoms/animated-box'
+import { Bar } from '@/atoms'
+import { Dimensions } from 'react-native'
 
 const HeaderBar: FC<AnimatedBoxProps> = ({ children, ...rest }) => {
-  const height = Dimensions.get('window').height;
-  const topPosition = height * 0.02;
+  const height = Dimensions.get('window').height
+  const topPosition = height * 0.02
 
   return (
     <AnimatedBox
@@ -13,7 +13,8 @@ const HeaderBar: FC<AnimatedBoxProps> = ({ children, ...rest }) => {
       top={topPosition}
       left={0}
       right={0}
-      {...rest}>
+      {...rest}
+    >
       <Bar
         variant="headerBar"
         flexDirection="row"
@@ -21,11 +22,12 @@ const HeaderBar: FC<AnimatedBoxProps> = ({ children, ...rest }) => {
         mx="lg"
         my="md"
         px="sm"
-        minHeight={44}>
+        minHeight={44}
+      >
         {children}
       </Bar>
     </AnimatedBox>
-  );
-};
+  )
+}
 
-export default memo(HeaderBar);
+export default memo(HeaderBar)

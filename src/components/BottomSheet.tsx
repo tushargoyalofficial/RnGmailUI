@@ -1,14 +1,14 @@
-import React, { forwardRef, memo } from 'react';
-import RNBottomSheet, { BottomSheetProps } from '@gorhom/bottom-sheet';
-import { ColorProps, useTheme } from '@shopify/restyle';
-import { Theme } from '@/themes';
+import React, { forwardRef, memo } from 'react'
+import RNBottomSheet, { BottomSheetProps } from '@gorhom/bottom-sheet'
+import { ColorProps, useTheme } from '@shopify/restyle'
+import { Theme } from '@/themes'
 
-type IProps = BottomSheetProps & ColorProps<Theme>;
+type IProps = BottomSheetProps & ColorProps<Theme>
 
 const BottomSheet = forwardRef<RNBottomSheet, IProps>(({ ...rest }, ref) => {
-  const theme = useTheme<Theme>();
-  const bgColor = theme.colors['$background'];
-  const handleColor = theme.colors['$foreground'];
+  const theme = useTheme<Theme>()
+  const bgColor = theme.colors['$background']
+  const handleColor = theme.colors['$foreground']
 
   return (
     <RNBottomSheet
@@ -16,13 +16,13 @@ const BottomSheet = forwardRef<RNBottomSheet, IProps>(({ ...rest }, ref) => {
       ref={ref}
       handleIndicatorStyle={{
         backgroundColor: handleColor,
-        opacity: 0.8,
+        opacity: 0.8
       }}
       backgroundStyle={{
-        backgroundColor: bgColor,
+        backgroundColor: bgColor
       }}
     />
-  );
-});
+  )
+})
 
-export default memo(BottomSheet);
+export default memo(BottomSheet)

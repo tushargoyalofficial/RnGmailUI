@@ -1,10 +1,10 @@
-import React, { FC, memo } from 'react';
-import { useTheme } from '@shopify/restyle';
-import { StatusBar as NativeStatusBar } from 'react-native';
-import { Theme } from '@/themes';
+import React, { FC, memo } from 'react'
+import { useTheme } from '@shopify/restyle'
+import { StatusBar as NativeStatusBar } from 'react-native'
+import { Theme } from '@/themes'
 
 const StatusBar: FC = () => {
-  const theme = useTheme<Theme>();
+  const theme = useTheme<Theme>()
 
   return (
     <NativeStatusBar
@@ -12,7 +12,7 @@ const StatusBar: FC = () => {
       backgroundColor={theme.colors.$windowBackground || 'white'}
       barStyle={theme.statusBar?.barStyle}
     />
-  );
-};
+  )
+}
 
-export default memo(StatusBar);
+export default memo(StatusBar)

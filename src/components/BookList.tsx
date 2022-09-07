@@ -1,39 +1,39 @@
-import React, { FC, memo, useCallback } from 'react';
-import { FlatList, FlatListProps } from 'react-native';
-import { Book } from '@/models';
-import { Theme } from '@/themes';
-import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { ColorProps, createBox } from '@shopify/restyle';
-import BookListItem from './BookListItem';
-import BOOKS from '@/fixtures/books';
+import React, { FC, memo, useCallback } from 'react'
+import { FlatList, FlatListProps } from 'react-native'
+import { Book } from '@/models'
+import { Theme } from '@/themes'
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
+import { ColorProps, createBox } from '@shopify/restyle'
+import BookListItem from './BookListItem'
+import BOOKS from '@/fixtures/books'
 
-const StyledFlatList = createBox<Theme, FlatListProps<Book>>(FlatList);
+const StyledFlatList = createBox<Theme, FlatListProps<Book>>(FlatList)
 const StyledBottomSheetFlatList = createBox<Theme, FlatListProps<Book>>(
-  BottomSheetFlatList,
-);
+  BottomSheetFlatList
+)
 
 type IProps = {
-  inBottomSheet?: boolean;
-  onPressItem: (bookId: string) => void;
-  headerComponent?: FC<any>;
-} & ColorProps<Theme>;
+  inBottomSheet?: boolean
+  onPressItem: (bookId: string) => void
+  headerComponent?: FC<any>
+} & ColorProps<Theme>
 
 const BookList: FC<IProps> = ({
   onPressItem,
   headerComponent,
   color,
-  inBottomSheet,
+  inBottomSheet
 }) => {
   const renderItem = useCallback(
     ({ item }) => {
-      return <BookListItem {...item} onPress={onPressItem} color={color} />;
+      return <BookListItem {...item} onPress={onPressItem} color={color} />
     },
-    [onPressItem],
-  );
+    [onPressItem]
+  )
 
   const ListComponent = inBottomSheet
     ? StyledBottomSheetFlatList
-    : StyledFlatList;
+    : StyledFlatList
 
   return (
     <ListComponent
@@ -46,7 +46,7 @@ const BookList: FC<IProps> = ({
       pt="sm"
       ListHeaderComponent={headerComponent}
     />
-  );
-};
+  )
+}
 
-export default memo(BookList);
+export default memo(BookList)

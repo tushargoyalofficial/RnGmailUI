@@ -1,44 +1,44 @@
-import activeThemeId from '@/states/theme';
-import {useAtom} from 'jotai';
+import activeThemeId from '@/states/theme'
+import { useAtom } from 'jotai'
 import React, {
   forwardRef,
   useCallback,
   useImperativeHandle,
   useMemo,
-  useRef,
-} from 'react';
+  useRef
+} from 'react'
 import RNBottomSheet, {
   BottomSheetBackdrop,
-  BottomSheetFlatList,
-} from '@gorhom/bottom-sheet';
-import ThemeListItem from './ThemeListItem';
-import BottomSheet from './BottomSheet';
-import {Box, Text} from '@/atoms';
-import {IThemeMeta, themes} from '@/themes';
+  BottomSheetFlatList
+} from '@gorhom/bottom-sheet'
+import ThemeListItem from './ThemeListItem'
+import BottomSheet from './BottomSheet'
+import { Box, Text } from '@/atoms'
+import { IThemeMeta, themes } from '@/themes'
 
 interface IProps {}
 
 interface IThemePickerHandle {
-  show: () => void;
+  show: () => void
 }
 
 const ThemePicker = forwardRef<IThemePickerHandle, IProps>((_props, ref) => {
-  const [, setActiveTheme] = useAtom(activeThemeId);
-  const refBottomSheet = useRef<RNBottomSheet>(null);
-  const snapPoints = useMemo(() => ['40%', '90%'], []);
+  const [, setActiveTheme] = useAtom(activeThemeId)
+  const refBottomSheet = useRef<RNBottomSheet>(null)
+  const snapPoints = useMemo(() => ['40%', '90%'], [])
 
   useImperativeHandle(ref, () => ({
     show: () => {
-      const {current: bottomSheet} = refBottomSheet;
+      const { current: bottomSheet } = refBottomSheet
       if (bottomSheet) {
-        bottomSheet.snapToIndex(0);
+        bottomSheet.snapToIndex(0)
       }
-    },
-  }));
+    }
+  }))
 
-  const renderThemeItem = useCallback(({item}) => {
-    return <ThemeListItem theme={item} onPress={setActiveTheme} />;
-  }, []);
+  const renderThemeItem = useCallback(({ item }) => {
+    return <ThemeListItem theme={item} onPress={setActiveTheme} />
+  }, [])
 
   return (
     <BottomSheet
@@ -55,7 +55,8 @@ const ThemePicker = forwardRef<IThemePickerHandle, IProps>((_props, ref) => {
       detached
       bottomInset={46}
       enablePanDownToClose
-      style={{marginHorizontal: 12}}>
+      style={{ marginHorizontal: 12 }}
+    >
       <BottomSheetFlatList
         ListHeaderComponent={() => (
           <Box p="lg" alignItems="center">
@@ -67,8 +68,8 @@ const ThemePicker = forwardRef<IThemePickerHandle, IProps>((_props, ref) => {
         renderItem={renderThemeItem}
       />
     </BottomSheet>
-  );
-});
+  )
+})
 
-type ThemePicker = IThemePickerHandle;
-export default ThemePicker;
+type ThemePicker = IThemePickerHandle
+export default ThemePicker

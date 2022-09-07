@@ -1,6 +1,6 @@
-import React, { FC, memo } from 'react';
-import Pressable, { PressableProps } from './pressable';
-import { Platform } from 'react-native';
+import React, { FC, memo } from 'react'
+import Pressable, { PressableProps } from './pressable'
+import { Platform } from 'react-native'
 import {
   composeRestyleFunctions,
   BackgroundColorProps,
@@ -14,26 +14,26 @@ import {
   ResponsiveValue,
   useRestyle,
   useResponsiveProp,
-  useTheme,
-} from '@shopify/restyle';
-import { Theme } from '@/themes';
+  useTheme
+} from '@shopify/restyle'
+import { Theme } from '@/themes'
 
 type IRestyleProps = BackgroundColorProps<Theme> &
   BackgroundColorShorthandProps<Theme> &
   BorderProps<Theme> &
-  OpacityProps<Theme>;
+  OpacityProps<Theme>
 
 const restyleFunctions = composeRestyleFunctions<Theme, IRestyleProps>([
   backgroundColorShorthand,
   backgroundColor,
   border,
-  opacity,
-]);
+  opacity
+])
 
 interface IProps extends PressableProps {
-  pressed?: IRestyleProps;
-  rippleColor?: ResponsiveValue<keyof Theme['colors'], Theme>;
-  rippleBorderLess?: boolean;
+  pressed?: IRestyleProps
+  rippleColor?: ResponsiveValue<keyof Theme['colors'], Theme>
+  rippleBorderLess?: boolean
 }
 
 const Touchable: FC<IProps> = ({
@@ -45,11 +45,11 @@ const Touchable: FC<IProps> = ({
 }) => {
   const { style: pressedStyle } = pressed
     ? useRestyle(restyleFunctions, pressed)
-    : { style: undefined };
+    : { style: undefined }
 
-  const theme = useTheme<Theme>();
-  const rippleColorProp = rippleColor && useResponsiveProp(rippleColor);
-  const rippleColorValue = rippleColorProp && theme.colors[rippleColorProp];
+  const theme = useTheme<Theme>()
+  const rippleColorProp = rippleColor && useResponsiveProp(rippleColor)
+  const rippleColorValue = rippleColorProp && theme.colors[rippleColorProp]
 
   return (
     <Pressable
@@ -60,8 +60,8 @@ const Touchable: FC<IProps> = ({
         isPressed ? [style, pressedStyle] : style
       }
     />
-  );
-};
+  )
+}
 
 export const TouchableOpacity: React.FC<IProps> = props => (
   <Touchable
@@ -69,6 +69,6 @@ export const TouchableOpacity: React.FC<IProps> = props => (
     {...props}
     pressed={{ opacity: Platform.select({ ios: 0.6 }) }}
   />
-);
+)
 
-export default memo(Touchable);
+export default memo(Touchable)

@@ -1,28 +1,32 @@
-import React, {FC, memo, useCallback, useRef, useState} from 'react';
-import {Box, Container, Text, TouchableOpacity} from '@/atoms';
-import {CompositeScreenProps} from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {DrawerScreenProps} from '@react-navigation/drawer';
-import {HomeDrawerParamList, RootStackParamsList} from '@/Navs';
-import useStickyHeader from '@/hooks/use-sticky-header';
+import React, { FC, memo, useCallback, useRef, useState } from 'react'
+import { Box, Container, Text, TouchableOpacity } from '@/atoms'
+import { CompositeScreenProps } from '@react-navigation/native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { DrawerScreenProps } from '@react-navigation/drawer'
+import { HomeDrawerParamList, RootStackParamsList } from '@/Navs'
+import useStickyHeader from '@/hooks/use-sticky-header'
 
-import NoteList from '@/components/NoteList';
-import HeaderBar from '@/components/HeaderBar';
-import FeatherIcon from '@/components/Icon';
-import MoveNoteSheet from '@/components/MoveNoteSheet';
-import ThemePicker from '@/components/ThemePicker';
+import NoteList from '@/components/NoteList'
+import HeaderBar from '@/components/HeaderBar'
+import FeatherIcon from '@/components/Icon'
+import MoveNoteSheet from '@/components/MoveNoteSheet'
+import ThemePicker from '@/components/ThemePicker'
 
 type IProps = CompositeScreenProps<
   DrawerScreenProps<HomeDrawerParamList, 'Main'>,
   NativeStackScreenProps<RootStackParamsList>
 >
 
-const MainScreen: FC<IProps> = ({navigation}) => {
-  const refThemePicker = useRef<ThemePicker>(null);
-  const refMoveNoteSheet = useRef<MoveNoteSheet>(null);
+const MainScreen: FC<IProps> = ({ navigation }) => {
+  const refThemePicker = useRef<ThemePicker>(null)
+  const refMoveNoteSheet = useRef<MoveNoteSheet>(null)
 
-  const {handleNoteListLayout, handleScroll, headerBarStyle, headerBarHeight} =
-    useStickyHeader();
+  const {
+    handleNoteListLayout,
+    handleScroll,
+    headerBarStyle,
+    headerBarHeight
+  } = useStickyHeader()
 
   const [concealNoteListItem, setConcealNoteListItem] = useState<
     (() => void) | null
@@ -33,19 +37,19 @@ const MainScreen: FC<IProps> = ({navigation}) => {
   }, [])
 
   const handleMenuToggle = useCallback(() => {
-    const {current: menu} = refThemePicker;
+    const { current: menu } = refThemePicker
     if (menu) {
-      menu.show();
+      menu.show()
     }
-  }, []);
+  }, [])
 
   const handleNoteListItemPress = useCallback((noteId: string) => {
-    navigation.navigate('Detail', {noteId});
-  }, []);
+    navigation.navigate('Detail', { noteId })
+  }, [])
 
   const handleNoteListItemSwipeLeft = useCallback(
     (_noteId: string, conceal: () => void) => {
-      const {current: menu} = refMoveNoteSheet;
+      const { current: menu } = refMoveNoteSheet
       if (menu) {
         menu.show()
         setConcealNoteListItem(() => conceal)
@@ -83,7 +87,8 @@ const MainScreen: FC<IProps> = ({navigation}) => {
           m="xs"
           p="xs"
           rippleBorderLess
-          onPress={handleMenuToggle}>
+          onPress={handleMenuToggle}
+        >
           <FeatherIcon name="more-vertical" size={22} />
         </TouchableOpacity>
       </HeaderBar>

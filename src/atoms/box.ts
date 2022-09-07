@@ -1,7 +1,7 @@
-import { Theme } from '@/themes';
-import { createBox } from '@shopify/restyle';
+import { Theme } from '@/themes'
+import { createBox } from '@shopify/restyle'
 
-const Box = createBox<Theme>();
-export type BoxProps = React.ComponentProps<typeof Box>;
+const Box = createBox<Theme>()
+export type BoxProps = React.ComponentProps<typeof Box>
 
-export default Box;
+export default Box
